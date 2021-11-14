@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# newegg_item_query_wrapper
+
+ITEMS_FILE=${1}
+
+RESULTS_JSON=results_json
+
+echo "{" > ${RESULTS_JSON}
+
+NUMBER_OF_ITEMS=$((`wc -l ${ITEMS_FILE} | awk '{print $1}'`+1))
+
+LAST_ITEM=1
+for ITEM in `cat ${ITEMS_FILE}`
+do
+RESULT=`bash newegg_item_in_stock_query ${ITEM}`
+[[ `echo ${RESULT} | grep -i "in stock"` != "" ]] && {
+[[ $LAST_ITEM -eq $NUMBER_OF_ITEMS ]] && echo "\"${ITEM}\":\"in stock\"" >> ${RESULTS_JSON}
+[[ $LAST_ITEM -ne $NUMBER_OF_ITEMS ]] && echo "\"${ITEM}\":\"in stock\"," >> ${RESULTS_JSON}
+}
+[[ `echo ${RESULT} | grep -i "in stock"` == "" ]] && {
+[[ $LAST_ITEM -eq $NUMBER_OF_ITEMS ]] && echo "\"${ITEM}\":\"no stock\"" >> ${RESULTS_JSON}
+[[ $LAST_ITEM -ne $NUMBER_OF_ITEMS ]] && echo "\"${ITEM}\":\"no stock\"," >> ${RESULTS_JSON}
+}
+LAST_ITEM=$(($LAST_ITEM+1))
+done
+echo "}" >> ${RESULTS_JSON}
+
+cat ${RESULTS_JSON}
+
+# bash newegg_item_query_wrapper newegg_items
