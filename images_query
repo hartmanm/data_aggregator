@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# images_query
+
+TARGET_URL=${1}
+
+curl -s "${TARGET_URL}" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img"| tr "'" '\n' | tr ',=";&(? ' '\n' | grep "https" > /tmp/image_list
+
+# .svg .png .jp2 .jpeg .gif .jpg
+grep -E ".png" /tmp/image_list
+grep -E ".jpeg" /tmp/image_list
+grep -E ".jp2" /tmp/image_list
+grep -E ".svg" /tmp/image_list
+grep -E ".gif" /tmp/image_list
+# exclude amazon incorrect file extension images
+for ITEM in `grep -E ".jpg" /tmp/image_list`
+do
+[[ `echo ${ITEM} | tr '.' ' ' | awk '{print $NF}'` == "jpg" ]] && echo ${ITEM}
+done
+
+# bash images_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS
+
+# bash images_query https://www.coursera.org
+
+# bash images_query https://www.elastic.co/
