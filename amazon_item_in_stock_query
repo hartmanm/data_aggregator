@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# amazon_item_in_stock_query
+
+TARGET_AMAZON_URL=${1}
+
+curl -s "${TARGET_AMAZON_URL}" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | tr '<>' '\n' | grep -i "In stock."
+
+# bash amazon_item_in_stock_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ

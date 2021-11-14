@@ -3,6 +3,8 @@
 
 ## amazon products in stock?
 
+clear url after ?
+
 curl "https://www.amazon.com/XFX-Speedster-QICK319-Graphics-RX-67XTYPBDP/dp/B091ZKN2RV" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | tr '<>' '\n' | grep "In stock."
 
 
