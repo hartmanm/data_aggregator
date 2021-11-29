@@ -48,12 +48,9 @@ curl -s "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en" -H "Accep
 # get all img sources
 curl -s "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep "https" > /tmp/headline_images; cat /tmp/headline_images
 
-
 curl -s "https://openrig.net" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep -E ".png/|.jp2" > /tmp/imgs; > /tmp/fpimgs; for item in `cat /tmp/imgs`; do echo "https://openrig.net/${item}" >> /tmp/fpimgs; done; cat /tmp/fpimgs
 
-
-curl -s "https://www.bitcoinblockhalf.com" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep -v "alt" | grep -E ".png/|.jp2" > /tmp/headline_images; cat /tmp/headline_images
-
+curl -s "https://www.bitcoinblockhalf.com" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep -v "alt" > /tmp/headline_images; cat /tmp/headline_images
 
 
 # return list of supported coins
