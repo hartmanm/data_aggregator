@@ -17,7 +17,7 @@ LAST_ITEM=1
 for ITEM in `cat ${COINS_FILE}`
 do
 # get coin data
-RESULT=`curl -s "https://coinmarketcap.com/currencies/${ITEM}/markets/" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | tr '<' '\n' | grep "priceValue" | tr '>' '\n' | grep -v " "`
+RESULT=`curl -s "https://coinmarketcap.com/currencies/${ITEM}/markets/" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | tr '<,' '\n' | tr '>' '\n' | grep -i -A 10 "${ITEM}" | grep -A 10 url | grep "price\":" | grep -v ",\"" | tr ':' ' ' | awk '{print $NF}'` # "price\""  #Change\":{\"price"  #| grep -i "${ITEM}\":\"\"price"  #| tr '>' '\n' | grep -v " "
 [[ $LAST_ITEM -eq 100 ]] && echo "\"${ITEM}\":\"${RESULT}\"" >> ${RESULTS_JSON}
 [[ $LAST_ITEM -ne 100 ]] && [[ ${RESULT} != "" ]] && echo "\"${ITEM}\":\"${RESULT}\"," >> ${RESULTS_JSON}
 #echo "\"${ITEM}\":\"${RESULT}\""
