@@ -6,6 +6,27 @@ TARGET_URL=${1}
 
 curl -s "${TARGET_URL}" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img"| tr "'" '\n' | tr ',=";&(? ' '\n' | grep "https" > /tmp/image_list
 
+#cat /tmp/image_list
+
+
+curl -s "${TARGET_URL}" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep -v "alt" > /tmp/image_list_partial #| tr "'" '\n' | tr ',=";&(? ' '\n' > /tmp/image_list
+# curl -s "https://www.bitcoinblockhalf.com" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep -v "alt" > /tmp/headline_images; cat /tmp/headline_images
+
+
+# TODO need to append TARGET URL to get full path images for image_list_partial
+#for ITEM in `grep -E ".jpg" /tmp/image_list`
+#do
+#[[ `echo ${ITEM} | tr '.' ' ' | awk '{print $NF}'` == "jpg" ]] && echo ${ITEM}
+#done
+
+grep -E ".png" /tmp/image_list_partial
+grep -E ".jpeg" /tmp/image_list_partial
+grep -E ".jp2" /tmp/image_list_partial
+grep -E ".svg" /tmp/image_list_partial
+grep -E ".gif" /tmp/image_list_partial
+
+
+
 # .svg .png .jp2 .jpeg .gif .jpg
 grep -E ".png" /tmp/image_list
 grep -E ".jpeg" /tmp/image_list
@@ -17,6 +38,10 @@ for ITEM in `grep -E ".jpg" /tmp/image_list`
 do
 [[ `echo ${ITEM} | tr '.' ' ' | awk '{print $NF}'` == "jpg" ]] && echo ${ITEM}
 done
+
+
+
+# bash images_query https://www.bitcoinblockhalf.com
 
 # bash images_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS
 
