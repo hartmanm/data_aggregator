@@ -6,18 +6,10 @@ TARGET_URL=${1}
 
 curl -s "${TARGET_URL}" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img"| tr "'" '\n' | tr ',=";&(? ' '\n' | grep "https" > /tmp/image_list
 
-#cat /tmp/image_list
-
 
 curl -s "${TARGET_URL}" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep -v "alt" > /tmp/image_list_partial #| tr "'" '\n' | tr ',=";&(? ' '\n' > /tmp/image_list
-# curl -s "https://www.bitcoinblockhalf.com" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "<img" | tr ',="' '\n' | grep -v "alt" > /tmp/headline_images; cat /tmp/headline_images
 
 
-# TODO need to append TARGET URL to get full path images for image_list_partial
-#for ITEM in `grep -E ".jpg" /tmp/image_list`
-#do
-#[[ `echo ${ITEM} | tr '.' ' ' | awk '{print $NF}'` == "jpg" ]] && echo ${ITEM}
-#done
 > /tmp/resulting_images
 grep -E ".png" /tmp/image_list_partial >> /tmp/resulting_images
 grep -E ".jpeg" /tmp/image_list_partial >> /tmp/resulting_images
@@ -38,10 +30,18 @@ for ITEM in `grep -E ".jpg" /tmp/image_list`
 do
 [[ `echo ${ITEM} | tr '.' ' ' | awk '{print $NF}'` == "jpg" ]] && echo ${ITEM} >> /tmp/resulting_images
 done
+# exclude amazon incorrect file extension images
+for ITEM in `grep -E ".jpg" /tmp/image_list_partial`
+do
+[[ `echo ${ITEM} | tr '.' ' ' | awk '{print $NF}'` == "jpg" ]] && echo ${ITEM} >> /tmp/resulting_images
+done
 
 > /tmp/final_images
 for ITEM in `cat /tmp/resulting_images`
 do
+
+[[ `echo ${ITEM} | grep "coursera"` != "" ]] && [[ `echo ${ITEM} | grep "imageUrl"` != "" ]] && ITEM=`echo ${ITEM} | tr ';' ' ' | awk '{print $NF}'`
+
 [[ `echo ${ITEM} | tr ':' ' ' | awk '{print $1}' | grep http` == "" ]] && {
 [[ `echo ${ITEM:0:2}` != ".." ]] && echo ${1}${ITEM} >> /tmp/final_images
 [[ `echo ${ITEM:0:2}` == ".." ]] && echo ${1}${ITEM:2:${#ITEM}} >> /tmp/final_images
@@ -49,10 +49,10 @@ do
 [[ `echo ${ITEM} | tr ':' ' ' | awk '{print $1}' | grep http` != "" ]] && echo ${ITEM} >> /tmp/final_images
 done
 
+sed s/\&quot/\"/g /tmp/final_images > /tmp/final_images_expanded_quotes
 
-uniq /tmp/final_images /tmp/final_images_uniq
 
-#[[ ${} ]]
+uniq /tmp/final_images_expanded_quotes /tmp/final_images_uniq
 
 IMAGES_FILE=/tmp/final_images_uniq
 RESULTS_JSON=results_images_json
@@ -64,9 +64,24 @@ NUMBER_OF_ITEMS=$((`wc -l ${IMAGES_FILE} | awk '{print $1}'`+1))
 LAST_ITEM=2
 for ITEM in `cat ${IMAGES_FILE}`
 do
-echo "$LAST_ITEM  $NUMBER_OF_ITEMS"
+#[[ `echo ${ITEM} | grep "com/"` != "" ]] && {
+[[ `echo ${ITEM} | grep "<"` == "" ]] && [[ `echo ${ITEM} | grep "?"` == "" ]] && [[ `echo ${ITEM} | grep ">"` == "" ]] && {
+[[ `echo ${ITEM} | grep "/width"` == "" ]] && [[ `echo ${ITEM} | grep "/svg"` == "" ]] && [[ `echo ${ITEM} | grep "/class"` == "" ]] && {
+[[ `echo ${ITEM} | grep "/id"` == "" ]] && [[ `echo ${ITEM} | grep "/png"` == "" ]] && {
+[[ `echo ${ITEM} | grep "orgclass"` == "" ]] && [[ `echo ${ITEM} | grep "orgwidth"` == "" ]] && {
+[[ `echo ${ITEM} | grep "orgtype"` == "" ]] && [[ `echo ${ITEM} | grep "orgfill"` == "" ]] && {
+[[ `echo ${ITEM} | grep "orgaria-hidden"` == "" ]] && [[ `echo ${ITEM} | grep "orgid"` == "" ]] && {
+[[ `echo ${ITEM} | grep "orgdata-track"` == "" ]] && [[ `echo ${ITEM} | grep "orgrole"` == "" ]] && {
+#echo "$LAST_ITEM  $NUMBER_OF_ITEMS"
 [[ $LAST_ITEM -eq $NUMBER_OF_ITEMS ]] && echo "\"${ITEM}\":\"\"" >> ${RESULTS_JSON}
 [[ $LAST_ITEM -ne $NUMBER_OF_ITEMS ]] && echo "\"${ITEM}\":\"\"," >> ${RESULTS_JSON}
+}
+}
+}
+}
+}
+}
+}
 LAST_ITEM=$(($LAST_ITEM+1))
 done
 echo "}" >> ${RESULTS_JSON}
@@ -74,13 +89,24 @@ echo "}" >> ${RESULTS_JSON}
 cat ${RESULTS_JSON}
 
 
+# bash images_query https://www.elastic.co/
+
+# bash images_query https://www.coursera.org
+
 
 # bash images_query https://www.bitcoinblockhalf.com
 
 # bash images_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS
 
-# bash images_query https://www.coursera.org
 
-# bash images_query https://www.elastic.co/
+
+
 
 # bash images_query https://www.coinglass.com
+
+# bash images_query https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en
+
+
+# bash images_query https://www.openrig.net
+
+
