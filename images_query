@@ -75,7 +75,7 @@ ITEM_COUNT=0
 LAST_ITEM=2
 for ITEM in `cat ${IMAGES_FILE}`
 do
-#[[ `echo ${ITEM} | grep "com/"` != "" ]] && {
+ITEM=`echo ${ITEM} | tr -d "\""`
 [[ `echo ${ITEM} | grep "<"` == "" ]] && [[ `echo ${ITEM} | grep "?"` == "" ]] && [[ `echo ${ITEM} | grep ">"` == "" ]] && {
 [[ `echo ${ITEM} | grep "/width"` == "" ]] && [[ `echo ${ITEM} | grep "/svg"` == "" ]] && [[ `echo ${ITEM} | grep "/class"` == "" ]] && {
 [[ `echo ${ITEM} | grep "/id"` == "" ]] && [[ `echo ${ITEM} | grep "/png"` == "" ]] && {
@@ -165,6 +165,7 @@ echo ${NUMBER_OF_ITEMS}
 # bash images_query https://www.coinglass.com
 
 # bash images_query "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"
+
 
 
 
