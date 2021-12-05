@@ -4,7 +4,7 @@
 
 ITEMS_FILE=${1}
 
-RESULTS_JSON=results_json
+RESULTS_JSON=results_json_newegg
 
 echo "{" > ${RESULTS_JSON}
 
