@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+for the University of Illinois
+2021
+Michael Neill Hartman
+-->
+<html lang="en">
+<head>
+<title>m22</title>
+<meta charset="utf-8">
+<meta name="Description" content="">
+<meta name="theme-color" content="#ffffff"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.header{padding-top:30px; padding-bottom:30px; text-align:center; color:white; background-color:#0d0422;}
+.base_div{padding-top:30px; padding-bottom:30px; text-align:center; color:white; background-color:#7ba6c1;}
+lamda_link:hover,lamda_link:active,lamda_link:focus{padding-top: 15px; padding-bottom: 17px; cursor:pointer;}
+.json_interface{ 
+max-width: 10vw;
+max-height: 10vh;
+margin:7vw,1vw,1vw;
+border:2vw; 
+border-color:rgba(33, 7, 51, 0.822);
+background-color:#373441;
+color: white;
+}
+.out_interface{ 
+max-width: 95vw;
+max-height: 5vh;
+margin:7vw,1vw,1vw;
+border:2vw; 
+border-color:rgba(33, 7, 51, 0.822);
+color: white;
+}
+body{margin: 2vw; background:rgba(69, 75, 106, 0.66);}
+intro{
+text-align: left; color: #000000;
+background-color:white;
+}
+</style>
+</head>
+<body>
+<div class="header"><h1>m22</h1><p> </p></div>
+
+<div id="json_interface" class="json_interface">
+<p>Choose a JSON File:</p>
+<input id="json" type="file">
+</div> <!-- <div id="json_interface"> -->
+<br>
+<br>
+<intro id=trigger_reload></intro>
+<div class="base_div"></div>
+<output id="file_reader_out" class="out_interface"></output>
+<div class="footer"></div>
+
+<script>
+'use strict';
+var intro = document.getElementsByClassName("intro");
+var footer = document.getElementsByClassName("footer");
+var base_div = document.getElementsByClassName("base_div");
+
+function lamda_link(innerhtml,id,url,base_element)
+{
+var ddiv = document.createElement("lamda_link");
+ddiv.innerHTML = innerhtml;
+ddiv.id = id;
+var first=base_element[0];
+first.appendChild(ddiv);
+function execute_z(element,url){window.open(url);}
+var lamdalink = document.getElementById(id);
+lamdalink.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_z(target,url)}, false);
+}
+
+function reload(){location.reload();}
+function trigger_reload(){
+var main=document.getElementById("trigger_reload");
+main.innerHTML = "clear_json";
+main.id;
+//main.addEventListener("mouseover", function(e){var target = e.target || e.srcElement; hover(main.id)}, false);
+//main.addEventListener("mouseleave", function(e){var target = e.target || e.srcElement; leave(main.id)}, false);
+main.addEventListener("click", function(e){var target = e.target || e.srcElement; reload()}, false);
+}
+trigger_reload();
+
+var base = document.getElementById("base");
+var inner_html = {}
+var image_selector=[]
+var idbase=1;
+
+var fileInput_json = document.getElementById("json"),
+readFile2 = function () {
+var reader = new FileReader();
+reader.onload = function () {
+document.getElementById('file_reader_out').innerHTML = reader.result;
+var temp = document.getElementById('file_reader_out').innerHTML
+var map = temp;
+image_selector=[]
+inner_html = {}
+console.log(map);
+var jsonobj = JSON.parse(map);
+for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.log(jsonobj[key]);
+lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);
+idbase=idbase+1;
+}};
+};
+reader.readAsBinaryString(fileInput_json.files[0]);
+
+};
+fileInput_json.addEventListener('change', readFile2);
+
+</script>
+</body>
+</html>
