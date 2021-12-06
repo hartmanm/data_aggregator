@@ -42,7 +42,7 @@ ITEM=`echo ${ITEM} | tr -d "'"`
 
 [[ `echo ${ITEM} | grep "coursera"` != "" ]] && [[ `echo ${ITEM} | grep "imageUrl"` != "" ]] && ITEM=`echo ${ITEM} | tr ';' ' ' | awk '{print $NF}'`
 
-[[ `echo ${ITEM:0:1}` == "/" ]] && [[ `echo ${ITEM} | grep App_Drive` != "" ]] && {
+[[ `echo ${ITEM:0:1}` == "/" ]] && [[ `echo ${ITEM} | grep App_Drive` != "" ]] && [[ `echo ${ITEM} | grep thumb` == "" ]] && {
 TL=`echo ${TARGET_URL} | tr '.' ' ' | awk '{print $1}'`
 echo "${TL}.com${ITEM}" >> /tmp/final_images
 } 
