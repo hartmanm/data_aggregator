@@ -32,6 +32,11 @@ border:2vw;
 border-color:rgba(33, 7, 51, 0.822);
 color: white;
 }
+.grid_container{
+width: 300vw;
+height: 300vh;
+margin: 7vw,2vw,2vw;
+}
 body{margin: 2vw; background:rgba(69, 75, 106, 0.66);}
 intro{
 text-align: left; color: #000000;
@@ -50,6 +55,7 @@ background-color:white;
 <br>
 <intro id=trigger_reload></intro>
 <div class="base_div"></div>
+<div id="grid_container" class="grid_container"></div>
 <output id="file_reader_out" class="out_interface"></output>
 <div class="footer"></div>
 
@@ -58,6 +64,7 @@ background-color:white;
 var intro = document.getElementsByClassName("intro");
 var footer = document.getElementsByClassName("footer");
 var base_div = document.getElementsByClassName("base_div");
+var grid_container = document.getElementsByClassName("grid_container");
 
 function lamda_link(innerhtml,id,url,base_element)
 {
@@ -98,8 +105,18 @@ image_selector=[]
 inner_html = {}
 console.log(map);
 var jsonobj = JSON.parse(map);
+console.log(jsonobj);
+var is_crypto=false
 for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.log(jsonobj[key]);
-lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);
+//console.log(jsonobj[key]
+if(key == "bitcoin"){is_crypto=true}
+if(! is_crypto){
+if(jsonobj[key] == "no stock"){lamda_link('<img src="outofstock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+if(jsonobj[key] == "in stock"){lamda_link('<img src="instock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+}
+var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
+if(is_crypto){lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);}
 idbase=idbase+1;
 }};
 };
