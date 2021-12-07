@@ -54,6 +54,7 @@ background-color:white;
 <br>
 <br>
 <intro id=trigger_reload></intro>
+ <div class="amazon"></div>
 <div class="base_div"></div>
 <div id="grid_container" class="grid_container"></div>
 <output id="file_reader_out" class="out_interface"></output>
@@ -61,8 +62,35 @@ background-color:white;
 
 <script>
 'use strict';
+
+const node_server="http://localhost:8080";
+  
+// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash amazon_item_query_wrapper amazon_items"}'
+function pull_amazon(){
+//var url = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD";
+//fetch(url).then(data => data.json()).then(data => {
+//''var n = data.last;
+//btc = n;
+//document.getElementById(coin).value = n;})}
+const data = {"command":"bash amazon_item_query_wrapper amazon_items"};
+fetch(node_server, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json',},
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  document.getElementsByClassName("amazon").value = data;
+  console.log('Success:', data);
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+};
+  
 var intro = document.getElementsByClassName("intro");
 var footer = document.getElementsByClassName("footer");
+ var amazon = document.getElementsByClassName("amazon");
 var base_div = document.getElementsByClassName("base_div");
 var grid_container = document.getElementsByClassName("grid_container");
 
