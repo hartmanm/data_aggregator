@@ -8,7 +8,16 @@
 //npm install body-parser
 
 // what can be executed
-const known_commands=["ls -pla","ls","cat package.json"];
+const known_commands=[
+"ls -pla",
+"ls",
+"cat package.json",
+
+
+"bash amazon_item_query_wrapper amazon_items"
+
+
+];
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -48,8 +57,21 @@ response.send(`${data}`);
 };
 
 
+if(request.body.command=="bash amazon_item_query_wrapper amazon_items"){
+const ls = spawn("bash", ["amazon_item_query_wrapper","amazon_items"]);
+ls.stdout.on("data", data => {
+console.log(`stdout: ${data}`);
+response.send(`${data}`);
+});
+};
+
+
+
 });
 app.listen(8080);
 
 
 // curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"ls -pla"}'
+
+
+// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash amazon_item_query_wrapper amazon_items"}'
