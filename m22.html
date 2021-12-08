@@ -65,7 +65,7 @@ background-color:white;
 
 const node_server='http://localhost:9000';
 //const data_cmd = {"command":"bash amazon_item_query_wrapper amazon_items"};
-const data_cmd = {"command":"bash images_query https://www.bitcoinblockhalf.com"}
+const data_cmd = {"command":""}
 
 // curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash amazon_item_query_wrapper amazon_items"}'
 //function pull_amazon(){
@@ -90,11 +90,9 @@ referrerPolicy: 'no-referrer',
 body: JSON.stringify(data)
 })
 
-
 //const out_data = await response.json();
 console.log(response);
 //return out_data;
-document.getElementsByClassName("amazon").value =response;
 }
 
 
@@ -217,7 +215,10 @@ reader.readAsBinaryString(fileInput_json.files[0]);
 };
 
 //var fileInput_json = document.getElementById("json")
-
+// results_images_json_httpswwwbitcoinblockhalfcom
+// results_json_amazon
+// results_json_coin_market_cap
+// results_json_newegg
 
 fileInput_json.addEventListener('change', readFile2);
 

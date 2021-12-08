@@ -43,7 +43,7 @@ var app = express();
 
 app.use(      
 function (req, res, next) {
-res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+res.setHeader('Access-Control-Allow-Origin', '*');
 res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 res.setHeader('Access-Control-Allow-Credentials', true);
@@ -54,8 +54,39 @@ express.json()
 app.post('/', function(request, response){
 //console.log(`request.body.command: ${request.body.command}`);
 const { spawn } = require("child_process");
-if(known_commands.includes(request.body.command)==false){response.send(request.body);}
 
+// inits all processes when request is recv
+if(known_commands.includes(request.body.command)==false){
+    console.log("commands");
+    const bbh = spawn("bash", ["images_query","https://www.bitcoinblockhalf.com"]);
+    // bbh.stdout.on("data", data => {
+    // console.log(`stdout: ${data}`);
+    // });
+    
+    console.log("2");
+    const aq = spawn("bash", ["amazon_item_query_wrapper","amazon_items"]);
+    // aq.stdout.on("data", data => {
+    // console.log(`stdout: ${data}`);
+    // });
+    
+    console.log("3");
+    const nq = spawn("bash", ["newegg_item_query_wrapper","newegg_items"]);
+    // nq.stdout.on("data", data => {
+    // console.log(`stdout: ${data}`);
+    // });
+    console.log("4");
+
+    const cmc = spawn("bash", ["coinmarketcap_crypto_price_parser"]);
+    //cmc.stdout.on("data", data => {
+    //console.log(`stdout: ${data}`);
+    //});
+    
+    response.send(request.body);
+    console.log("all init");
+}
+
+
+// if get request generate all
 
 
 
@@ -84,7 +115,13 @@ response.send(`${data}`);
 });
 };
 
-
+if(request.body.command=="bash images_query https://www.bitcoinblockhalf.com"){
+const ls = spawn("bash", ["images_query","https://www.bitcoinblockhalf.com"]);
+ls.stdout.on("data", data => {
+console.log(`stdout: ${data}`);
+response.send(`${data}`);
+});
+};
 if(request.body.command=="bash amazon_item_query_wrapper amazon_items"){
 const ls = spawn("bash", ["amazon_item_query_wrapper","amazon_items"]);
 ls.stdout.on("data", data => {
@@ -106,13 +143,7 @@ console.log(`stdout: ${data}`);
 response.send(`${data}`);
 });
 };
-if(request.body.command=="bash images_query https://www.bitcoinblockhalf.com"){
-const ls = spawn("bash", ["images_query","https://www.bitcoinblockhalf.com"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
+
 
 
 

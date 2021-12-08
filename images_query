@@ -170,14 +170,14 @@ echo "}" >> ${RESULTS_JSON}
 
 } ## [[ ${ITEM_COUNT} -eq 0 ]] && {
 
-uniq ${RESULTS_JSON} ${RESULTS_JSON_FINAL}
+uniq ${RESULTS_JSON} ${RESULTS_JSON_FINAL}_`echo ${1} | tr -d ':/.'`
 #LAST=`tail -1 ${RESULTS_JSON_FINAL} | head -1`
 #[[ `echo ${LAST: -1}` == "," ]] &&  LAST=${LAST:0:$((${#ITEM}-1))}
 #echo $LAST
 
 
 
-cat ${RESULTS_JSON_FINAL}
+cat ${RESULTS_JSON_FINAL}_`echo ${1} | tr -d ':/.'`
 
 #echo ${ITEM_COUNT}
 #echo ${NUMBER_OF_ITEMS}
