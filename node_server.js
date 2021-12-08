@@ -38,7 +38,19 @@ const known_commands=[
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-app.use(express.json());
+
+
+
+app.use(      
+function (req, res, next) {
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+res.setHeader('Access-Control-Allow-Credentials', true);
+next();
+},
+express.json()
+);
 app.post('/', function(request, response){
 //console.log(`request.body.command: ${request.body.command}`);
 const { spawn } = require("child_process");
@@ -126,21 +138,20 @@ response.send(`${data}`);
 
 
 });
-app.listen(8080);
+app.listen(9000);
 
 
-// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"ls -pla"}'
+// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"ls -pla"}'
 
 
-// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash amazon_item_query_wrapper amazon_items"}'
+// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash amazon_item_query_wrapper amazon_items"}'
 
-// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash newegg_item_query_wrapper newegg_items"}'
+// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash newegg_item_query_wrapper newegg_items"}'
 
-// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash coinmarketcap_crypto_price_parser"}'
+// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash coinmarketcap_crypto_price_parser"}'
 
-// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash images_query https://www.coursera.org"}'
+// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash images_query https://www.coursera.org"}'
 
-// curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash images_query https://www.bitcoinblockhalf.com"}'
-
+// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash images_query https://www.bitcoinblockhalf.com"}'
 
 

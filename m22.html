@@ -63,36 +63,100 @@ background-color:white;
 <script>
 'use strict';
 
-const node_server="http://localhost:8080";
-  
+const node_server='http://localhost:9000';
+//const data_cmd = {"command":"bash amazon_item_query_wrapper amazon_items"};
+const data_cmd = {"command":"bash images_query https://www.bitcoinblockhalf.com"}
+
 // curl -X POST http://localhost:8080  -H 'Content-Type: application/json'  -d '{"command":"bash amazon_item_query_wrapper amazon_items"}'
-function pull_amazon(){
+//function pull_amazon(){
 //var url = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD";
 //fetch(url).then(data => data.json()).then(data => {
 //''var n = data.last;
 //btc = n;
 //document.getElementById(coin).value = n;})}
-const data = {"command":"bash amazon_item_query_wrapper amazon_items"};
-fetch(node_server, {
-  method: 'POST',
-  headers: {'Content-Type': 'application/json',},
-  body: JSON.stringify(data),
+//redirect: 'follow',
+
+async function post(url = '',data = {}){
+    console.log(url);
+    console.log(data);
+
+const response = await fetch(url, {
+method: 'POST',
+mode: 'no-cors',
+cache: 'no-cache',
+credentials: 'same-origin',
+headers: {'Content-Type': 'application/json'},
+referrerPolicy: 'no-referrer',
+body: JSON.stringify(data)
 })
+
+
+//const out_data = await response.json();
+console.log(response);
+//return out_data;
+document.getElementsByClassName("amazon").value =response;
+}
+
+
+
+function post2(url = '',data = {}){
+    console.log(JSON.stringify(data));
+var xhr = new XMLHttpRequest();
+xhr.open("POST",url,true);
+
+
+//xhr.setRequestHeader('Origin', url);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
+xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+xhr.send(JSON.stringify(data));
+
+
+}
+
+/*
+var getJSONP = function ( url, callback ) {
+
+// Create script with url and callback (if specified)
+var ref = window.document.getElementsByTagName( 'script' )[ 0 ];
+var script = window.document.createElement( 'script' );
+script.src = url + (url.indexOf( '?' ) + 1 ? '&' : '?') + 'callback=' + callback;
+
+// Insert script tag into the DOM (append to <head>)
+ref.parentNode.insertBefore( script, ref );
+
+// After the script is loaded (and executed), remove it
+script.onload = function () {
+    this.remove();
+};
+
+};
+console.log(getJSONP);
+
 .then(response => response.json())
 .then(data => {
-  document.getElementsByClassName("amazon").value = data;
-  console.log('Success:', data);
+console.log('Success:', data);
+//document.getElementsByClassName("amazon").value = data;
 })
 .catch((error) => {
-  console.error('Error:', error);
+console.error('Error:', error)
 });
-};
+//console.log('Success:', data);
+//})
+*/
+
+//};
   
 var intro = document.getElementsByClassName("intro");
 var footer = document.getElementsByClassName("footer");
  var amazon = document.getElementsByClassName("amazon");
 var base_div = document.getElementsByClassName("base_div");
 var grid_container = document.getElementsByClassName("grid_container");
+
+//pull_amazon();
+post(node_server, data_cmd);
+//post2(node_server, data_cmd);
+
 
 function lamda_link(innerhtml,id,url,base_element)
 {
@@ -151,7 +215,13 @@ idbase=idbase+1;
 reader.readAsBinaryString(fileInput_json.files[0]);
 
 };
+
+//var fileInput_json = document.getElementById("json")
+
+
 fileInput_json.addEventListener('change', readFile2);
+
+
 
 </script>
 </body>
