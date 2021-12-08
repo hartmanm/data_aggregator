@@ -179,8 +179,8 @@ uniq ${RESULTS_JSON} ${RESULTS_JSON_FINAL}
 
 cat ${RESULTS_JSON_FINAL}
 
-echo ${ITEM_COUNT}
-echo ${NUMBER_OF_ITEMS}
+#echo ${ITEM_COUNT}
+#echo ${NUMBER_OF_ITEMS}
 
 ## tested with:
 
