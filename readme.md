@@ -4,7 +4,7 @@
 
 This readme is the final report.
 
-Note only macos and linux are supported.
+Note `only macos and linux are supported`
 
 Before you can launch you need to install dependencies
 
