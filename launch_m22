@@ -1,12 +1,28 @@
 #!/bin/bash
 
+# for the University of Illinois
+# 2021
+# Michael Neill Hartman
+
 # launch_m22
 
+# install dependencies
+# git clone repo
+# install node.js // download and install the linux or macos version from: https://nodejs.org/en/download
+# then use node package manager (npm) to install packages
+# sudo npm install express
+# sudo npm install body-parser
+# sudo npm install http-server -g
+
+# configure amazon_items and newegg_items files to have one item url per line
+
+# to run, 
+# cd <to cloned repo directory>
 # bash launch_m22
 
-
+# kills any already running processes and starts the back and front end servers each in a screen, 
+# then opens the site and begins pull and parse
 pkill -f node_server
 pkill -f http-server
-
 screen -dmS node_server node node_server.js
 screen -dmS http-server http-server -o m22.html
