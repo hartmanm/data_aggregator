@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# launch_m22
+
+# bash launch_m22
+
+
+pkill -f node_server
+pkill -f http-server
+
+screen -dmS node_server node node_server.js
+screen -dmS http-server http-server -o m22.html

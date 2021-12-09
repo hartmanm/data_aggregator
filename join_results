@@ -2,7 +2,7 @@
 
 # join_results
 
-sleep 3
+sleep 5
 
 RESULTS_JSON=z_all_results_json
 > ${RESULTS_JSON}
@@ -22,11 +22,12 @@ results_json_coin_market_cap
 
 NUMBER_OF_RESULT_JSON_FILES=`echo ${RESULT_JSONS} | awk '{print NF}'`
 
-echo $NUMBER_OF_RESULT_JSON_FILES
+#echo $NUMBER_OF_RESULT_JSON_FILES
 #exec true
 FILE_ITERATOR=1
 for FILE in ${RESULT_JSONS}
 do
+#echo ${FILE}
 NUMBER_OF_ITEMS=$((`wc -l ${FILE} | awk '{print $1}'`+1))
 LAST_ITEM=1
 while [[ $LAST_ITEM -lt $NUMBER_OF_ITEMS ]]
