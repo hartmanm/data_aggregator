@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# google_news_headlines
+
+curl -s "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | tr '"' '\n' | tr '<' ' ' | tr '=' '\n' | grep "h3>" | tr '/' '\n' | grep -v "a>" | grep -v "h3>" | tr '&;' '\n' | grep -v "#3" | tr '\n' '!' | tr -d '!' | tr '>' '\n' > /tmp/111;tail -$((`wc -l /tmp/111 | awk '{print $1}'`)) /tmp/111 > /tmp/1112
+
+HEADLINES_FILE=/tmp/results_google_headlines
+awk 'NF > 0' /tmp/1112 > /tmp/11122
+uniq /tmp/11122 ${HEADLINES_FILE}
+
+RESULTS_JSON=results_json_google_headlines
+> ${RESULTS_JSON}
+echo "{" > ${RESULTS_JSON}
+
+NUMBER_OF_ITEMS=$((`wc -l ${HEADLINES_FILE} | awk '{print $1}'`+1))
+LAST_ITEM=1
+while [[ $LAST_ITEM -lt $NUMBER_OF_ITEMS ]]
+do
+ITEM=`head -$LAST_ITEM ${HEADLINES_FILE} | tail -1`
+[[ $LAST_ITEM -eq $(($NUMBER_OF_ITEMS-1)) ]] && echo "\"${ITEM}\":\"headline\"" >> ${RESULTS_JSON}
+[[ $LAST_ITEM -ne $(($NUMBER_OF_ITEMS-1)) ]] && echo "\"${ITEM}\":\"headline\"," >> ${RESULTS_JSON}
+LAST_ITEM=$(($LAST_ITEM+1))
+done
+echo "}" >> ${RESULTS_JSON}
+
+cat ${RESULTS_JSON}
+

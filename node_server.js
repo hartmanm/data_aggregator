@@ -56,37 +56,25 @@ app.post('/', function(request, response){
 const { spawn } = require("child_process");
 
 // inits all processes when request is recv
+// and not a known_command, triggers generate all
 if(known_commands.includes(request.body.command)==false){
     console.log("commands");
     const bbh = spawn("bash", ["images_query","https://www.bitcoinblockhalf.com"]);
-    // bbh.stdout.on("data", data => {
-    // console.log(`stdout: ${data}`);
-    // });
-    
     console.log("2");
     const aq = spawn("bash", ["amazon_item_query_wrapper","amazon_items"]);
-    // aq.stdout.on("data", data => {
-    // console.log(`stdout: ${data}`);
-    // });
-    
     console.log("3");
     const nq = spawn("bash", ["newegg_item_query_wrapper","newegg_items"]);
-    // nq.stdout.on("data", data => {
-    // console.log(`stdout: ${data}`);
-    // });
     console.log("4");
-
     const cmc = spawn("bash", ["coinmarketcap_crypto_price_parser"]);
-    //cmc.stdout.on("data", data => {
-    //console.log(`stdout: ${data}`);
-    //});
-    
+    console.log("5");
+    const ig = spawn("bash", ["images_query","https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"]);
+    console.log("6");
+    const gnh = spawn("bash", ["google_news_headlines"]);
+    console.log("7");
+    const jr = spawn("bash", ["join_results"]);
     response.send(request.body);
     console.log("all init");
 }
-
-
-// if get request generate all
 
 
 
