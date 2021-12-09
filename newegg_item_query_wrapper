@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# for the University of Illinois
+# 2021
+# Michael Neill Hartman
+
 # newegg_item_query_wrapper
 
 ITEMS_FILE=${1}
@@ -28,4 +32,5 @@ echo "}" >> ${RESULTS_JSON}
 
 cat ${RESULTS_JSON}
 
+# example use
 # bash newegg_item_query_wrapper newegg_items

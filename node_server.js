@@ -1,48 +1,21 @@
-
-// start server
-// node node_server.js
+/*
+for the University of Illinois
+2021
+Michael Neill Hartman
+*/
 
 // install node.js
 // install npm dependencies
-//npm install express
-//npm install body-parser
+// npm install express
+// npm install body-parser
 
 // what can be executed
-const known_commands=[
-"ls -pla",
-"ls",
-"cat package.json",
-
-
-"bash amazon_item_query_wrapper amazon_items",
-"bash newegg_item_query_wrapper newegg_items",
-"bash coinmarketcap_crypto_price_parser",
-"bash images_query https://www.bitcoinblockhalf.com",
-
-
-
-
-"bash images_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS",
-
-
-"bash images_query \"https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en\"",
-
-
-
-
-"bash images_query https://www.coursera.org",
-
-"lastr"
-];
-
+const known_commands=["lastr"];
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-
-
-
 app.use(      
-function (req, res, next) {
+function (req, res, next){
 res.setHeader('Access-Control-Allow-Origin', '*');
 res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -52,125 +25,29 @@ next();
 express.json()
 );
 app.post('/', function(request, response){
-//console.log(`request.body.command: ${request.body.command}`);
 const { spawn } = require("child_process");
-
 // inits all processes when request is recv
 // and not a known_command, triggers generate all
 if(known_commands.includes(request.body.command)==false){
-    console.log("commands");
-    const bbh = spawn("bash", ["images_query","https://www.bitcoinblockhalf.com"]);
-    console.log("2");
-    const aq = spawn("bash", ["amazon_item_query_wrapper","amazon_items"]);
-    console.log("3");
-    const nq = spawn("bash", ["newegg_item_query_wrapper","newegg_items"]);
-    console.log("4");
-    const cmc = spawn("bash", ["coinmarketcap_crypto_price_parser"]);
-    console.log("5");
-    const ig = spawn("bash", ["images_query","https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"]);
-    console.log("6");
-    const gnh = spawn("bash", ["google_news_headlines"]);
-    console.log("7");
-    const jr = spawn("bash", ["join_results"]);
-    response.send(request.body);
-    console.log("all init");
+console.log("commands");
+const bbh = spawn("bash", ["images_query","https://www.bitcoinblockhalf.com"]);
+console.log("2");
+const aq = spawn("bash", ["amazon_item_query_wrapper","amazon_items"]);
+console.log("3");
+const nq = spawn("bash", ["newegg_item_query_wrapper","newegg_items"]);
+console.log("4");
+const cmc = spawn("bash", ["coinmarketcap_crypto_price_parser"]);
+console.log("5");
+const ig = spawn("bash", ["images_query","https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"]);
+console.log("6");
+const gnh = spawn("bash", ["google_news_headlines"]);
+console.log("7");
+const jr = spawn("bash", ["join_results"]);
+response.send(request.body);
+console.log("all init");
 }
-
-
-
-if(request.body.command=="ls -pla"){
-const ls = spawn("ls", ["-plah"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-
-if(request.body.command=="ls"){
-const ls = spawn("ls");
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-
-
-if(request.body.command=="cat package.json"){
-const ls = spawn("cat", ["package.json"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-
-if(request.body.command=="bash images_query https://www.bitcoinblockhalf.com"){
-const ls = spawn("bash", ["images_query","https://www.bitcoinblockhalf.com"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-if(request.body.command=="bash amazon_item_query_wrapper amazon_items"){
-const ls = spawn("bash", ["amazon_item_query_wrapper","amazon_items"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-if(request.body.command=="bash newegg_item_query_wrapper newegg_items"){
-const ls = spawn("bash", ["newegg_item_query_wrapper","newegg_items"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-if(request.body.command=="bash coinmarketcap_crypto_price_parser"){
-const ls = spawn("bash", ["coinmarketcap_crypto_price_parser"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-
-
-
-
-
-
-
-
-
-
-
-
-// too big??
-
-if(request.body.command=="bash images_query https://www.coursera.org"){
-const ls = spawn("bash", ["images_query","https://www.coursera.org"]);
-ls.stdout.on("data", data => {
-console.log(`stdout: ${data}`);
-response.send(`${data}`);
-});
-};
-
-
-
-
 });
 app.listen(9000);
 
-
-// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"ls -pla"}'
-
-
-// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash amazon_item_query_wrapper amazon_items"}'
-
-// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash newegg_item_query_wrapper newegg_items"}'
-
-// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash coinmarketcap_crypto_price_parser"}'
-
-// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash images_query https://www.coursera.org"}'
-
-// curl -X POST http://localhost:9000  -H 'Content-Type: application/json'  -d '{"command":"bash images_query https://www.bitcoinblockhalf.com"}'
-
-
+// how to start server:
+// node node_server.js

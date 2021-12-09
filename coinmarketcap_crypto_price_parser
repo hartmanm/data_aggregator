@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# for the University of Illinois
+# 2021
+# Michael Neill Hartman
+
 # coinmarketcap_crypto_price_parser
 
 MAX_RESULTS=10
@@ -30,4 +34,5 @@ echo "}" >> ${RESULTS_JSON}
 
 cat ${RESULTS_JSON}
 
+# example use
 # bash coinmarketcap_crypto_price_parser

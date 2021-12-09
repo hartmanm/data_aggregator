@@ -26,3 +26,6 @@ pkill -f node_server
 pkill -f http-server
 screen -dmS node_server node node_server.js
 screen -dmS http-server http-server -o m22.html
+
+# example use
+# bash launch_m22

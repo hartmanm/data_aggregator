@@ -52,3 +52,6 @@ FILE_ITERATOR=$(($FILE_ITERATOR+1))
 done
 echo "}" >> ${RESULTS_JSON}
 cat ${RESULTS_JSON}
+
+# example use
+# bash join_results
