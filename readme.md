@@ -1,5 +1,3 @@
-# CourseProject
-
 # m22 custom scraper / information aggregator
 
 This readme is the final report.
@@ -45,7 +43,12 @@ Each of the scrape and parse tools can also be run independently.
 - `sudo npm install body-parser`
 - `sudo npm install http-server -g`
 
-4. (Optional) configure amazon_items and newegg_items files to have one item url per line
+4. install screen
+- update your /etc/apt/sources.list to include an updated source
+- sudo apt update
+- sudo apt install -y screen
+
+5. (Optional) configure amazon_items and newegg_items files to have one item url per line
 - add amazon item urls to `amazon_items` file
 - add newegg item urls to `newegg_items` file
 
