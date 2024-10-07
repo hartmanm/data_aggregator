@@ -13,6 +13,7 @@
 # sudo npm install express
 # sudo npm install body-parser
 # sudo npm install http-server -g
+# sudo apt install screen
 
 # configure amazon_items and newegg_items files to have one item url per line
 
@@ -20,12 +21,25 @@
 # cd <to cloned repo directory>
 # bash launch_m22
 
+initial_update(){
+bash images_query https://www.bitcoinblockhalf.com 
+bash amazon_item_query_wrapper amazon_items 
+bash newegg_item_query_wrapper newegg_items 
+bash coinmarketcap_crypto_price_parser 
+bash images_query https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en 
+bash google_news_headlines 
+bash join_results 
+}
+
 # kills any already running processes and starts the back and front end servers each in a screen, 
 # then opens the site and begins pull and parse
 pkill -f node_server
 pkill -f http-server
 screen -dmS node_server node node_server.js
+initial_update
 screen -dmS http-server http-server -o m22.html
+
+
 
 # example use
 # bash launch_m22
