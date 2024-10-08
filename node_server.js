@@ -1,7 +1,5 @@
 /*
-for the University of Illinois
-2021
-Michael Neill Hartman
+Copyright (c) 2021 Michael Neill Hartman. All rights reserved.
 */
 
 // install node.js

@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-# Copyright (c) 2023 Michael Neill Hartman. All rights reserved.
+# Copyright (c) 2024 Michael Neill Hartman. All rights reserved.
 
 TARGET_URL="$1"
 TARGET_KEYWORD=profile
@@ -24,7 +24,6 @@ uniq /tmp/11122 ${BUILDER_FILE}
 
 for item in `cat $BUILDER_FILE`
 do
-#echo $item
 bash images_query $item
 done
 
@@ -42,24 +41,21 @@ clear
 
 ign
 
-#cat target_results_json
 > image_results_json
 echo '{' > image_results_json
 [[ ! -d targets ]] && mkdir targets
 cd targets
-#LAST=""
-#awk 'NF > 0' /tmp/1112 > /tmp/11122
 COUNTER=0
 for item in `cat ../target_results_json`
 do
-#LAST=$item
 wget `echo $item | tr '"' ' ' | awk '{print $1}'`
-item=`echo $item | tr '/"' '\n' | grep jpg`
-[[ `echo $item` != "" ]] && echo -e \"${COUNTER}A\":$item\" >> ../image_results_json
+item=`echo $item | tr '/"' '\n' | grep jpg | tr '.' ' ' | awk '{print $1}'`
+[[ `echo $item` != "" ]] && echo -e \"${COUNTER}A\":\"$item\", >> ../image_results_json
 COUNTER=$(($COUNTER +1))
 done
 echo '"endcap":""' >> ../image_results_json
 echo '}' >> ../image_results_json
 ls
+rm *.1
 cd ..
 cat image_results_json
