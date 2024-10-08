@@ -1,12 +1,38 @@
 #!/bin/bash
 
-# for the University of Illinois
-# 2021
-# Michael Neill Hartman
+# Copyright (c) 2021 Michael Neill Hartman. All rights reserved.
 
 # google_news_headlines
 
-curl -s "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | tr '"' '\n' | tr '<' ' ' | tr '=' '\n' | grep "h3>" | tr '/' '\n' | grep -v "a>" | grep -v "h3>" | tr '&;' '\n' | grep -v "#3" | tr '\n' '!' | tr -d '!' | tr '>' '\n' > /tmp/111;tail -$((`wc -l /tmp/111 | awk '{print $1}'`)) /tmp/111 > /tmp/1112
+#cat <<EOF > /tmp/ccm 
+#!/bin/bash
+#curl -s "https://news.google.com/home?hl=en-US&gl=US&ceid=US:en" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/129.0.6668.80 Safari/604.1" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0"
+#| tr '"' '\n' | tr '<' ' ' | tr '=' '\n' | grep "h3>" | tr '/' '\n' | grep -v "a>" | grep -v "h3>" | tr '&;' '\n' | grep -v "#3" | tr '\n' '!' | tr -d '!' | tr '>' '\n' > /tmp/111;tail -$((`wc -l /tmp/111 | awk '{print $1}'`)) /tmp/111 > /tmp/1112
+#cat /tmp/1112
+#EOF
+#exec true
+>  /tmp/headline_links_unresolved
+curl -s "https://news.google.com/home?hl=en-US&gl=US&ceid=US:en" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/129.0.6668.80 Safari/604.1" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed | grep "aria-hidden=" | tr '.?' '\n' | grep read | grep -v box | grep -v animation | grep -v opacity > /tmp/headline_links_unresolved
+> /tmp/headline_links_unresolved_uniq
+#echo ----------------------------------
+uniq /tmp/headline_links_unresolved /tmp/headline_links_unresolved_uniq
+#cat /tmp/headline_links_unresolved_uniq
+#echo ----------------------------------
+> /tmp/headline_links
+cut -c 2- /tmp/headline_links_unresolved_uniq
+for item in `cat /tmp/headline_links_unresolved_uniq`
+do
+echo ---------------------------------- >> /tmp/headline_links
+curl -s "https://news.google.com/home${item}" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/129.0.6668.80 Safari/604.1" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cookie: <>" -H "Connection: keep-alive" -H "Cache-Control: max-age=0" --compressed >> /tmp/headline_links
+echo ---------------------------------- >> /tmp/headline_links
+#echo "https://news.google.com/home${item}" >> /tmp/headline_links
+done
+
+cat /tmp/headline_links
+exec true
+#/read/CBMiqAFBVV95cUxOeURJOXBmcUNzVWtlcFoxaHBoNVI4R2Z1Zk1GdzZ1b09yek45YzVOeUMzVFRTaWRvYnRqb3FGTG1MdkhWUjlJeG8zRU5laHFJbGh2Y2liaW5IelN3TkZJX2dUWG8yYThyY0M3TDBjYkNmMjd6NTZpanRaMjdPc1ExUVFGNWhadTFuUEZiRVhLdXQyc0V2SjBqNFh1WXkwMVZEUUlxQlhJNXbSAa4BQVVfeXFMUHhPVTF1NEdVWGRteEluLWo3blhrVkFteFc4T3JUcG5vcmh3SXJDRXhjMXFmeVotbVZzNVU0WjE5eGZMZExNcGtDcTRzYWY1dlJZNy0zWkJ2dDNyVVdmby0xM3RqVXhZMUZaYU01ZzFrT0xmVmFRWC1Pb0hIMkNlS3U3YmNPdTdSM2xTVnhVd3pkLTBIcVg1OGp3OGFpVjlPRVB5WjF6X05nbG5rOE5B
+
+#| tr '"' '\n' | tr '<' ' ' | tr '=' '\n' | grep "h3>" | tr '/' '\n' | grep -v "a>" | grep -v "h3>" | tr '&;' '\n' | grep -v "#3" | tr '\n' '!' | tr -d '!' | tr '>' '\n' > /tmp/111;tail -$((`wc -l /tmp/111 | awk '{print $1}'`)) /tmp/111 > /tmp/1112
 
 HEADLINES_FILE=/tmp/results_google_headlines
 awk 'NF > 0' /tmp/1112 > /tmp/11122
