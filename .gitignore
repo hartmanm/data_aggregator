@@ -9,3 +9,7 @@ results_json_google_headlines
 results_json_newegg
 results_images_json_httpsnewsgooglecomtopstorieshlen-US
 results_images_json_httpsnewsgooglecomhome
+targets/*
+image_results_json
+target_results_json
+results_images*

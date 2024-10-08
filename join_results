@@ -30,7 +30,9 @@ results_images_json_httpsnewsgooglecomtopstorieshlen-USglUSceidUSen
 results_images_json_httpswwwbitcoinblockhalfcom
 results_json_google_headlines
 results_json_coin_market_cap
+`ls | grep results_images_json | tr ' ' '\n'`
 "
+
 NUMBER_OF_RESULT_JSON_FILES=`echo ${RESULT_JSONS} | awk '{print NF}'`
 FILE_ITERATOR=1
 for FILE in ${RESULT_JSONS}

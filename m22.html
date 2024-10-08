@@ -54,26 +54,26 @@ background-color:white;
 'use strict';
 const node_server='http://localhost:9000';
 const data_cmd = {"command":""}
-async function post(url = '',data = {}){
-console.log(url);
-console.log(data);
-const response = await fetch(url, {
-method: 'POST',
-mode: 'no-cors',
-cache: 'no-cache',
-credentials: 'same-origin',
-headers: {'Content-Type': 'application/json'},
-referrerPolicy: 'no-referrer',
-body: JSON.stringify(data)
-})
-console.log(response);
-}
+//async function post(url = '',data = {}){
+//console.log(url);
+//console.log(data);
+//const response = await fetch(url, {
+//method: 'POST',
+//mode: 'no-cors',
+//cache: 'no-cache',
+//credentials: 'same-origin',
+//headers: {'Content-Type': 'application/json'},
+//referrerPolicy: 'no-referrer',
+//body: JSON.stringify(data)
+//})
+//console.log(response);
+//}
 var intro = document.getElementsByClassName("intro");
 var footer = document.getElementsByClassName("footer");
 var amazon = document.getElementsByClassName("amazon");
 var base_div = document.getElementsByClassName("base_div");
 var grid_container = document.getElementsByClassName("grid_container");
-post(node_server, data_cmd);
+//post(node_server, data_cmd);
 function lamda_link(innerhtml,id,url,base_element)
 {
 var ddiv = document.createElement("lamda_link");
@@ -97,6 +97,9 @@ var base = document.getElementById("base");
 var inner_html = {}
 var image_selector=[]
 var idbase=1;
+//json={
+//'file:///media/removable/localiz_git/target_results_json.txt'
+//}
 var fileInput_json = document.getElementById("json"),
 readFile3 = function () {
 var reader = new FileReader();
