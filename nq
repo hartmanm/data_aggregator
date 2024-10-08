@@ -3,6 +3,7 @@
 
 # Copyright (c) 2023 Michael Neill Hartman. All rights reserved.
 
+TARGET_URL="$1"
 TARGET_KEYWORD=profile
 
 #TARGET_URL="$1"
