@@ -1,4 +1,4 @@
-# m22 custom scraper / information aggregator
+# data aggregator
 
 Note `only macos and linux are supported`
 
