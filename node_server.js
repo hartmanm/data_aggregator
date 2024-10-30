@@ -1,6 +1,8 @@
-/*
+/* 
 Copyright (c) 2021 Michael Neill Hartman. All rights reserved.
-*/
+mnh_license@proton.me
+https://github.com/hartmanm
+*/ 
 
 // install node.js
 // install npm dependencies
