@@ -57,8 +57,8 @@ background-color:white;
 //"startcap":"origin",
 //"endcap":"terminator"
 //}
-const node_server='http://localhost:3000';
-const data_cmd = {"command":""}
+//const node_server='http://localhost:3000';
+//const data_cmd = {"command":""}
 //async function post(url = '',data = {}){
 //console.log(url);
 //console.log(data);
@@ -129,12 +129,14 @@ for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.
 //}
 var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
 if(is_grid_container){
-let is_png = jsonobj[key].includes(".png");
-let is_jpg = jsonobj[key].includes(".jp");
+let is_png = key.includes(".png");
+let is_jpg = key.includes(".jp");
+console.log("jsonobj[key].includes(.png) ",is_png);
+console.log("jsonobj[key].includes(.jp) ",is_jpg);
 if(is_png || is_jpg){
-if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+if(jsonobj[key] != ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
 }else{
-if(jsonobj[key] != "headline"){lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);};
+lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);
 }
 }
 idbase=idbase+1;
