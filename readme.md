@@ -4,7 +4,7 @@ Note `only macos and linux are supported for query scripts`
 
 # what it does
 
-People spend a lot of time opening a bunch of different websites, reading them looking for specific data. da is a custom scraper / information aggregator that scrapes target websites for specific information, adding the results to a single json. da.html allows a this json to be loaded in a browser. The tools I developed scrape and parse:
+People spend a lot of time opening a bunch of different websites, reading them looking for specific data. da is a custom scraper / information aggregator that scrapes target websites for specific information, adding the results to a single json. da.html allows this json to be loaded in a browser. The tools I developed scrape and parse:
 
 - if items are in stock at amazon or newegg given the url of the item
 
