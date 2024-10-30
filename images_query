@@ -168,10 +168,8 @@ cat ${RESULTS_JSON_FINAL}_`echo ${1} | tr -d '"=-?&:/.'`
 
 # bash images_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS
 
-# bash images_query https://www.openrig.net
-
 # bash images_query https://www.coinglass.com
 
 # bash images_query https://www.coursera.org
 
-# bash images_query "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"
+
