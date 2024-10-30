@@ -99,8 +99,8 @@ main.addEventListener("click", function(e){var target = e.target || e.srcElement
 }
 trigger_reload();
 var base = document.getElementById("base");
-var inner_html = {}
-var image_selector=[]
+//var inner_html = {}
+//var image_selector=[]
 var idbase=1;
 //json={
 //'file:///media/removable/localiz_git/target_results_json.txt'
@@ -112,8 +112,8 @@ reader.onload = function () {
 document.getElementById('file_reader_out').innerHTML = reader.result;
 var temp = document.getElementById('file_reader_out').innerHTML
 var map = temp;
-image_selector=[]
-inner_html = {}
+//image_selector=[]
+//inner_html = {}
 //console.log(map);
 var jsonobj = JSON.parse(map);
 //var jsonobj =jsonData;
@@ -128,9 +128,10 @@ for(var key in jsonobj){
 //if(jsonobj[key] == "in stock"){lamda_link('<img src="instock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
 //if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
 //}
-lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);
-  
-var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
+//lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);
+lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);
+idbase=idbase+1;
+//var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
 //if(is_grid_container){
 /*
 let is_png = key.includes(".png");
@@ -144,7 +145,7 @@ lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase
 }
 }};
 */
-idbase=idbase+1;
+
 }
   
 };
