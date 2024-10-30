@@ -10,16 +10,17 @@
 TARGET_URL="$1"
 TARGET_KEYWORD=profile
 
-#TARGET_URL="$1"
-#TARGET_KEYWORD="$2"
-
 clean_results(){
 rm *json*
 }
 
-ign(){
-
+[[ "$1" == "clean" ]] && {
 clean_results
+echo "removed jsons"
+exec true
+}
+
+ign(){
 curl -s "$TARGET_URL" | tr ' ' '\n' | grep href | tr '"' '\n' | grep https > /tmp/1112
 
 BUILDER_FILE=/tmp/builder
@@ -32,6 +33,7 @@ bash images_query.sh $item
 done
 
 > target_results_json
+sleep 2
 bash join_results.sh
 
 echo '{' > target_results_json

@@ -26,10 +26,7 @@ echo "{" > ${RESULTS_JSON}
 RESULT_JSONS="
 results_json_amazon
 results_json_newegg
-results_images_json_httpsnewsgooglecomtopstorieshlen-USglUSceidUSen
 results_images_json_httpswwwbitcoinblockhalfcom
-results_json_google_headlines
-results_json_coin_market_cap
 `ls | grep results_images_json | tr ' ' '\n'`
 "
 
