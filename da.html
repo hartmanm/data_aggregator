@@ -107,10 +107,9 @@ reader.onload = function () {
 document.getElementById('file_reader_out').innerHTML = reader.result;
 var temp = document.getElementById('file_reader_out').innerHTML
 var map = temp;
-var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 var jsonobj = JSON.parse(map);
 for(var key in jsonobj){
-lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);
+lamda_link('<div class="grid-container">'+key+'</div>',idbase,key,grid_container);
 idbase=idbase+1;
 }
 };
