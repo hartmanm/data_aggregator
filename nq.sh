@@ -32,7 +32,7 @@ bash images_query.sh $item
 done
 
 > target_results_json
-bash join_results
+bash join_results.sh
 
 echo '{' > target_results_json
 for item in `cat z_all_results_json`
