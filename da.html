@@ -114,12 +114,13 @@ var temp = document.getElementById('file_reader_out').innerHTML
 var map = temp;
 image_selector=[]
 inner_html = {}
-console.log(map);
+//console.log(map);
 var jsonobj = JSON.parse(map);
 //var jsonobj =jsonData;
-console.log(jsonobj);
-var is_grid_container=true;
-for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.log(jsonobj[key]);
+//console.log(jsonobj);
+//var is_grid_container=true;
+for(var key in jsonobj){
+//if(key != ""){image_selector.push(jsonobj[key]);console.log(jsonobj[key]);
 //if(key == "bitcoin"){is_grid_container=true}
 //if(jsonobj[key] == "headline"){is_grid_container=true}
 //f(! is_grid_container){
@@ -127,8 +128,11 @@ for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.
 //if(jsonobj[key] == "in stock"){lamda_link('<img src="instock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
 //if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
 //}
+lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+  
 var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
-if(is_grid_container){
+//if(is_grid_container){
+/*
 let is_png = key.includes(".png");
 let is_jpg = key.includes(".jp");
 console.log("jsonobj[key].includes(.png) ",is_png);
@@ -138,7 +142,9 @@ if(jsonobj[key] != ""){lamda_link('<img src="'+key+' "style="width:200px;height:
 }else{
 lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);
 }
-}
+*/
+  
+//}
 idbase=idbase+1;
 }};
 };
