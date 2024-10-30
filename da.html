@@ -93,7 +93,7 @@ lamdalink.addEventListener("click", function(e){var target = e.target || e.srcEl
 function reload(){location.reload();}
 function trigger_reload(){
 var main=document.getElementById("trigger_reload");
-main.innerHTML = "clear_json_and_reinitalize_pull_and_parse__wait_5_seconds_before_loading_results_file";
+main.innerHTML = "clear_json";
 main.id;
 main.addEventListener("click", function(e){var target = e.target || e.srcElement; reload()}, false);
 }
@@ -129,8 +129,13 @@ for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.
 //}
 var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
 if(is_grid_container){
-if(jsonobj[key] == "headline"){lamda_link('<div class="grid-container">'+key+thisa+'</div>',idbase,key,grid_container);}
+let is_png = jsonobj[key].includes(".png");
+let is_jpg = jsonobj[key].includes(".jp");
+if(is_png || is_jpg){
+if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+}else{
 if(jsonobj[key] != "headline"){lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);};
+}
 }
 idbase=idbase+1;
 }};
