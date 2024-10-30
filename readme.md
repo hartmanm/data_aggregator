@@ -12,12 +12,6 @@ People spend a lot of time opening a bunch of different websites, reading them l
 
 Each of the scrape and parse tools can also be run independently.
 
-# intended functionality / features I didn't have time to implement
-
-- a single configuration file for all configurations
-
-- in general I intended for this tool to be more generic and automatic.
-
 # install dependencies
 
 1. clone the repo 
