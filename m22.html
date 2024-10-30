@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <!--
-for the University of Illinois
-2021
-Michael Neill Hartman
+Copyright (c) 2021 Michael Neill Hartman. All rights reserved.
+mnh_license@proton.me
+https://github.com/hartmanm
 -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>m22</title>
@@ -50,9 +50,14 @@ background-color:white;
 <div class="footer"></div>
 <output id="file_reader_out" class="out_interface"></output>
 <div class="base_div"></div>
+<!-- <script src="z_all_results_json"></script> -->
 <script>
 'use strict';
-const node_server='http://localhost:9000';
+let jsonData = {
+"startcap":"origin",
+"endcap":"terminator"
+}
+const node_server='http://localhost:3000';
 const data_cmd = {"command":""}
 //async function post(url = '',data = {}){
 //console.log(url);
@@ -110,17 +115,18 @@ var map = temp;
 image_selector=[]
 inner_html = {}
 console.log(map);
-var jsonobj = JSON.parse(map);
+//var jsonobj = JSON.parse(map);
+var jsonobj =jsonData;
 console.log(jsonobj);
-var is_grid_container=false
+var is_grid_container=true;
 for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.log(jsonobj[key]);
-if(key == "bitcoin"){is_grid_container=true}
-if(jsonobj[key] == "headline"){is_grid_container=true}
-if(! is_grid_container){
-if(jsonobj[key] == "no stock"){lamda_link('<img src="outofstock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
-if(jsonobj[key] == "in stock"){lamda_link('<img src="instock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
-if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
-}
+//if(key == "bitcoin"){is_grid_container=true}
+//if(jsonobj[key] == "headline"){is_grid_container=true}
+//f(! is_grid_container){
+//if(jsonobj[key] == "no stock"){lamda_link('<img src="outofstock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+//if(jsonobj[key] == "in stock"){lamda_link('<img src="instock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+//if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+//}
 var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
 if(is_grid_container){
 if(jsonobj[key] == "headline"){lamda_link('<div class="grid-container">'+key+thisa+'</div>',idbase,key,grid_container);}
