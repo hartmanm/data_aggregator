@@ -32,7 +32,7 @@ Each of the scrape and parse tools can also be run independently.
 1. Main processes
 - `bash launch_da` Primary launcher that invokes query scripts.
 
-- `da.html` the front end webpage, it can load any of the results jsons. If reloading the same json reload the page before loading the json.
+- `da.html` the front end webpage, it can load any of the results jsons. If reloading the same json reload the page or click the clear json button before loading the json.
 
 3. Scrape and parse tools
 - `bash amazon_item_query_wrapper amazon_items` wraps amazon_item_in_stock_query invoking it with each url from the amazon_items file and outputs them to the `results_json_amazon` file
@@ -42,7 +42,6 @@ Each of the scrape and parse tools can also be run independently.
 - `bash newegg_item_in_stock_query ${NEWEGG_ITEM_URL}`		
 			
 - `bash images_query ${TARGET_URL}` pulls all images from the url passed (note only tested with some websites) and outputs them to the `results_images_json_${TARGET_URL}` file
-- bash images_query defaults to pulling the images from the top google news headlines and outputs them to the `results_images_json_${TARGET_URL}` file
 	
 4. information aggregator tools
 - `bash join_results` generates a single json from all result jsons named `z_all_results_json`. What results files are included can be modified by changing the RESULT_JSONS list inside join_results.
