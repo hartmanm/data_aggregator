@@ -99,12 +99,7 @@ main.addEventListener("click", function(e){var target = e.target || e.srcElement
 }
 trigger_reload();
 var base = document.getElementById("base");
-//var inner_html = {}
-//var image_selector=[]
 var idbase=1;
-//json={
-//'file:///media/removable/localiz_git/target_results_json.txt'
-//}
 var fileInput_json = document.getElementById("json"),
 readFile3 = function () {
 var reader = new FileReader();
@@ -112,42 +107,12 @@ reader.onload = function () {
 document.getElementById('file_reader_out').innerHTML = reader.result;
 var temp = document.getElementById('file_reader_out').innerHTML
 var map = temp;
-//image_selector=[]
-//inner_html = {}
-//console.log(map);
+var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 var jsonobj = JSON.parse(map);
-//var jsonobj =jsonData;
-//console.log(jsonobj);
-//var is_grid_container=true;
 for(var key in jsonobj){
-//if(key != ""){image_selector.push(jsonobj[key]);console.log(jsonobj[key]);
-//if(key == "bitcoin"){is_grid_container=true}
-//if(jsonobj[key] == "headline"){is_grid_container=true}
-//f(! is_grid_container){
-//if(jsonobj[key] == "no stock"){lamda_link('<img src="outofstock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
-//if(jsonobj[key] == "in stock"){lamda_link('<img src="instock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
-//if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
-//}
-//lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);
 lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);
 idbase=idbase+1;
-//var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
-//if(is_grid_container){
-/*
-let is_png = key.includes(".png");
-let is_jpg = key.includes(".jp");
-console.log("jsonobj[key].includes(.png) ",is_png);
-console.log("jsonobj[key].includes(.jp) ",is_jpg);
-if(is_png || is_jpg){
-if(jsonobj[key] != ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
-}else{
-lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);
 }
-}};
-*/
-
-}
-  
 };
 reader.readAsBinaryString(fileInput_json.files[0]);
 };
