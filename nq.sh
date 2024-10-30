@@ -5,7 +5,7 @@
 # mnh_license@proton.me
 # https://github.com/hartmanm
 
-# nq.sh is a wrapper for images_query, it will work with some websites
+# nq.sh is a wrapper for images_query.sh, it will work with some websites
 
 TARGET_URL="$1"
 TARGET_KEYWORD=profile
@@ -28,7 +28,7 @@ uniq /tmp/11122 ${BUILDER_FILE}
 
 for item in `cat $BUILDER_FILE`
 do
-bash images_query $item
+bash images_query.sh $item
 done
 
 > target_results_json
