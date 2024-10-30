@@ -128,7 +128,7 @@ for(var key in jsonobj){
 //if(jsonobj[key] == "in stock"){lamda_link('<img src="instock.png "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
 //if(jsonobj[key] == ""){lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
 //}
-lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);}
+lamda_link('<img src="'+key+' "style="width:200px;height:200px; background-color: #7F9AB7;"/>',idbase,key,base_div);
   
 var thisa="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
 //if(is_grid_container){
@@ -142,11 +142,11 @@ if(jsonobj[key] != ""){lamda_link('<img src="'+key+' "style="width:200px;height:
 }else{
 lamda_link('<div class="grid-container">'+key+thisa+jsonobj[key]+'</div>',idbase,key,grid_container);
 }
-*/
-  
-//}
-idbase=idbase+1;
 }};
+*/
+idbase=idbase+1;
+};
+  
 };
 reader.readAsBinaryString(fileInput_json.files[0]);
 };
