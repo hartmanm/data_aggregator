@@ -41,33 +41,11 @@ background-color:white;
 <input id="json" type="file">
 </div>
 <br>
-<br>
 <intro id=trigger_reload></intro>
 <div id="grid_container" class="grid_container"></div>
 <script>
 'use strict';
-//let jsonData = {
-//"startcap":"origin",
-//"endcap":"terminator"
-//}
-//const node_server='http://localhost:3000';
-//const data_cmd = {"command":""}
-//async function post(url = '',data = {}){
-//console.log(url);
-//console.log(data);
-//const response = await fetch(url, {
-//method: 'POST',
-//mode: 'no-cors',
-//cache: 'no-cache',
-//credentials: 'same-origin',
-//headers: {'Content-Type': 'application/json'},
-//referrerPolicy: 'no-referrer',
-//body: JSON.stringify(data)
-//})
-//console.log(response);
-//}
 var grid_container = document.getElementsByClassName("grid_container");
-//post(node_server, data_cmd);
 function lamda_link(innerhtml,id,url,base_element)
 {
 var ddiv = document.createElement("lamda_link");
