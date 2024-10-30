@@ -25,8 +25,6 @@ background-color:#373441;
 color: white;
 }
 .grid_container{
-width: 800vw;
-height: 400vh;
 margin: 7vw,2vw,2vw;
 }
 body{margin: 2vw; background:rgba(69, 75, 106, 0.66);}
@@ -37,22 +35,15 @@ background-color:white;
 </style>
 </head>
 <body>
-<div class="header"><h1>da</h1><p> </p></div>
+<div class="header"><h1>https://hartmanm.github.io/data_aggregator/da.html</h1></div>
 <div id="json_interface" class="json_interface">
 <p>Choose a JSON File:</p>
 <input id="json" type="file">
-</div> <!-- <div id="json_interface"> -->
+</div>
+<br>
+<br>
 <intro id=trigger_reload></intro>
 <div id="grid_container" class="grid_container"></div>
-<!--
-<br>
-<br>
-<div class="amazon"></div>
-<div class="footer"></div>
-<output id="file_reader_out" class="out_interface"></output>
-<div class="base_div"></div>
--->
-<!-- <script src="z_all_results_json"></script> -->
 <script>
 'use strict';
 //let jsonData = {
@@ -75,10 +66,6 @@ background-color:white;
 //})
 //console.log(response);
 //}
-//var intro = document.getElementsByClassName("intro");
-//var footer = document.getElementsByClassName("footer");
-//var amazon = document.getElementsByClassName("amazon");
-//var base_div = document.getElementsByClassName("base_div");
 var grid_container = document.getElementsByClassName("grid_container");
 //post(node_server, data_cmd);
 function lamda_link(innerhtml,id,url,base_element)
@@ -106,9 +93,6 @@ var fileInput_json = document.getElementById("json"),
 readFile3 = function () {
 var reader = new FileReader();
 reader.onload = function () {
-//document.getElementById('file_reader_out').innerHTML = reader.result;
-//var temp = document.getElementById('file_reader_out').innerHTML
-//var map = temp;
 var jsonobj = JSON.parse(reader.result);
 for(var key in jsonobj){
 lamda_link('<div class="grid-container">'+key+'</div>',idbase,key,grid_container);
