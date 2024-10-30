@@ -53,10 +53,10 @@ background-color:white;
 <!-- <script src="z_all_results_json"></script> -->
 <script>
 'use strict';
-let jsonData = {
-"startcap":"origin",
-"endcap":"terminator"
-}
+//let jsonData = {
+//"startcap":"origin",
+//"endcap":"terminator"
+//}
 const node_server='http://localhost:3000';
 const data_cmd = {"command":""}
 //async function post(url = '',data = {}){
@@ -115,8 +115,8 @@ var map = temp;
 image_selector=[]
 inner_html = {}
 console.log(map);
-//var jsonobj = JSON.parse(map);
-var jsonobj =jsonData;
+var jsonobj = JSON.parse(map);
+//var jsonobj =jsonData;
 console.log(jsonobj);
 var is_grid_container=true;
 for(var key in jsonobj){if(key != ""){image_selector.push(jsonobj[key]);console.log(jsonobj[key]);
