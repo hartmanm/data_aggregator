@@ -5,7 +5,7 @@
 # mnh_license@proton.me
 # https://github.com/hartmanm
 
-# nq is a wrapper for images_query, it will work with some websites
+# nq.sh is a wrapper for images_query, it will work with some websites
 
 TARGET_URL="$1"
 TARGET_KEYWORD=profile

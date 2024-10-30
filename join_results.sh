@@ -4,7 +4,7 @@
 # mnh_license@proton.me
 # https://github.com/hartmanm
 
-# join_results
+# join_results.sh
 
 AMAZON_NUMBER_OF_ITEMS=$((`wc -l amazon_items | awk '{print $1}'`+1))
 NEWEGG_NUMBER_OF_ITEMS=$((`wc -l newegg_items | awk '{print $1}'`+1))
@@ -56,4 +56,4 @@ echo "}" >> ${RESULTS_JSON}
 cat ${RESULTS_JSON}
 
 # example use
-# bash join_results
+# bash join_results.sh

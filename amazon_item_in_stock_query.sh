@@ -4,7 +4,7 @@
 # mnh_license@proton.me
 # https://github.com/hartmanm
 
-# amazon_item_in_stock_query
+# amazon_item_in_stock_query.sh
 
 # determines if an item is instock at amazon, is wrapped by amazon_item_query_wrapper 
 
@@ -16,4 +16,4 @@ curl -s "${TARGET_AMAZON_URL}" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accep
 [[ `cat /tmp/amazon_query | tr ' ' '_' | grep "We_don't_know_when_or_if_this_item_will_be_back"` == "" ]] && grep -i "In stock." /tmp/amazon_query 
 
 # example use
-# bash amazon_item_in_stock_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS
+# bash amazon_item_in_stock_query.sh https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS

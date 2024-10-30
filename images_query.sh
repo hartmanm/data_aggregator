@@ -4,7 +4,7 @@
 # mnh_license@proton.me
 # https://github.com/hartmanm
 
-# images_query
+# images_query.sh
 
 # returns a json of all the images used or referenced by the url passed specifically. Not crawling links.
 
@@ -162,14 +162,14 @@ cat ${RESULTS_JSON_FINAL}_`echo ${1} | tr -d '"=-?&:/.'`
 # example use
 ## tested with:
 
-# bash images_query https://www.elastic.co/
+# bash images_query.sh https://www.elastic.co/
 
-# bash images_query https://www.bitcoinblockhalf.com
+# bash images_query.sh https://www.bitcoinblockhalf.com
 
-# bash images_query https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS
+# bash images_query.sh https://www.amazon.com/XFX-Speedster-SWFT210-Graphics-RX-66XT8DFDQ/dp/B09B17SQBS
 
-# bash images_query https://www.coinglass.com
+# bash images_query.sh https://www.coinglass.com
 
-# bash images_query https://www.coursera.org
+# bash images_query.sh https://www.coursera.org
 
 

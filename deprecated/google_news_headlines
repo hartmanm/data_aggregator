@@ -4,7 +4,7 @@
 # mnh_license@proton.me
 # https://github.com/hartmanm
 
-# google_news_headlines
+# google_news_headlines.sh
 
 #cat <<EOF > /tmp/ccm 
 #!/bin/bash
@@ -58,4 +58,4 @@ echo "}" >> ${RESULTS_JSON}
 cat ${RESULTS_JSON}
 
 # example use
-# bash google_news_headlines
+# bash google_news_headlines.sh
